@@ -7,6 +7,15 @@ use crate::{GameState, MainCamera};
 pub struct GameAssets {
     #[asset(path = "bevy_bird_dark.png")]
     pub bevy: Handle<Image>,
+
+    #[asset(path = "alienPink_square.png")]
+    pub piggy: Handle<Image>,
+
+    #[asset(path = "elementWood022.png")]
+    pub kiste: Handle<Image>,
+
+    #[asset(path = "elementWood008.png")]
+    pub roof: Handle<Image>,
 }
 
 pub struct LoadingPlugin;
