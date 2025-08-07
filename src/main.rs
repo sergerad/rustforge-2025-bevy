@@ -1,5 +1,6 @@
 mod level;
 mod loading;
+mod sling;
 mod splash_screen;
 
 use avian2d::prelude::*;
@@ -47,7 +48,14 @@ fn main() {
     }
 
     app.init_state::<GameState>();
-    app.add_plugins((LoadingPlugin, splash_screen::plugin, level::plugin));
+    app.insert_resource(Gravity(Vec2::NEG_Y * 9.81 * 50.0));
+
+    app.add_plugins((
+        LoadingPlugin,
+        splash_screen::plugin,
+        level::plugin,
+        sling::plugin,
+    ));
 
     app.add_plugins(PhysicsPlugins::default());
     app.add_plugins(PhysicsDebugPlugin::default());

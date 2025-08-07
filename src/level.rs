@@ -21,6 +21,12 @@ fn setup(mut commands: Commands) {
         Vec2::new(0., -50.),
         Vec2::new(0., -10.),
         Vec2::new(0., 30.),
+        //
+        Vec2::new(100., -130.),
+        Vec2::new(100., -90.),
+        Vec2::new(100., -50.),
+        Vec2::new(100., -10.),
+        Vec2::new(100., 30.),
     ];
 
     for b in boxes {
@@ -31,4 +37,11 @@ fn setup(mut commands: Commands) {
             Collider::rectangle(40., 40.),
         ));
     }
+
+    commands.spawn((
+        Name::new("box"),
+        Transform::from_translation(Vec3::new(50., 50., 0.)),
+        RigidBody::Dynamic,
+        Collider::triangle(Vec2::new(-80., 0.), Vec2::new(0., 60.), Vec2::new(80., 0.)),
+    ));
 }
