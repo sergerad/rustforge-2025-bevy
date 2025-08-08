@@ -9,6 +9,9 @@ struct Sling {
     pub velocity: Vec2,
 }
 
+#[derive(Event)]
+struct OnShoot;
+
 pub fn plugin(app: &mut App) {
     app.insert_resource(Sling {
         pos: Vec2::new(-300., -40.),
@@ -16,7 +19,9 @@ pub fn plugin(app: &mut App) {
     });
 
     app.add_systems(OnEnter(GameState::Playing), setup);
-    app.add_systems(Update, on_shoot.run_if(in_state(GameState::Playing)));
+    app.add_systems(Update, on_input.run_if(in_state(GameState::Playing)));
+
+    app.add_observer(on_shoot);
 }
 
 fn setup(mut commands: Commands, sling: Res<Sling>, assets: Res<GameAssets>) {
@@ -31,23 +36,27 @@ fn setup(mut commands: Commands, sling: Res<Sling>, assets: Res<GameAssets>) {
     ));
 }
 
+fn on_input(mut commands: Commands, mouse_buttons: Res<ButtonInput<MouseButton>>) {
+    if mouse_buttons.just_pressed(MouseButton::Left) {
+        commands.trigger(OnShoot);
+    }
+}
+
 fn on_shoot(
+    _: Trigger<OnShoot>,
     mut commands: Commands,
-    mouse_buttons: Res<ButtonInput<MouseButton>>,
     assets: Res<GameAssets>,
     sling: Res<Sling>,
 ) {
-    if mouse_buttons.just_pressed(MouseButton::Left) {
-        commands.spawn((
-            Name::new("bird"),
-            Transform::from_translation(sling.pos.extend(0.)),
-            RigidBody::Dynamic,
-            LinearVelocity(sling.velocity),
-            Collider::circle(20.),
-            children![(
-                Transform::from_scale(Vec3::new(0.2, 0.2, 1.)),
-                Sprite::from_image(assets.bevy.clone()),
-            )],
-        ));
-    }
+    commands.spawn((
+        Name::new("bird"),
+        Transform::from_translation(sling.pos.extend(0.)),
+        RigidBody::Dynamic,
+        LinearVelocity(sling.velocity),
+        Collider::circle(20.),
+        children![(
+            Transform::from_scale(Vec3::new(0.2, 0.2, 1.)),
+            Sprite::from_image(assets.bevy.clone()),
+        )],
+    ));
 }
