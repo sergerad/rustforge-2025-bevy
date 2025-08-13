@@ -19,7 +19,10 @@ pub fn plugin(app: &mut App) {
     });
 
     app.add_systems(OnEnter(GameState::Playing), setup);
-    app.add_systems(Update, on_input.run_if(in_state(GameState::Playing)));
+    app.add_systems(
+        Update,
+        (on_mouse_input, touch_input).run_if(in_state(GameState::Playing)),
+    );
 
     app.add_observer(on_shoot);
 }
@@ -36,7 +39,13 @@ fn setup(mut commands: Commands, sling: Res<Sling>, assets: Res<GameAssets>) {
     ));
 }
 
-fn on_input(mut commands: Commands, mouse_buttons: Res<ButtonInput<MouseButton>>) {
+fn touch_input(mut commands: Commands, touches: Res<Touches>) {
+    if touches.any_just_pressed() {
+        commands.trigger(OnShoot);
+    }
+}
+
+fn on_mouse_input(mut commands: Commands, mouse_buttons: Res<ButtonInput<MouseButton>>) {
     if mouse_buttons.just_pressed(MouseButton::Left) {
         commands.trigger(OnShoot);
     }

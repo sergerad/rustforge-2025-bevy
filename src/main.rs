@@ -31,10 +31,9 @@ fn main() {
             .set(WindowPlugin {
                 primary_window: Some(Window {
                     title: "Angry Bevys".to_string(),
-                    // Bind to canvas included in `index.html`
                     canvas: Some("#bevy".to_owned()),
-                    // Tells wasm not to override default event handling, like F5 and Ctrl+R
-                    prevent_default_event_handling: false,
+                    prevent_default_event_handling: true,
+                    fit_canvas_to_parent: true,
                     resolution: WindowResolution::new(768.0, 640.0),
                     ..default()
                 }),
