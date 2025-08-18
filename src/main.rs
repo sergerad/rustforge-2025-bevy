@@ -1,3 +1,4 @@
+mod background;
 mod level;
 mod loading;
 mod sling;
@@ -53,6 +54,7 @@ fn main() {
         splash_screen::plugin,
         level::plugin,
         sling::plugin,
+        background::plugin,
     ));
 
     app.add_plugins(PhysicsPlugins::default());

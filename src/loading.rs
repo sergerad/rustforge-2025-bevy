@@ -16,6 +16,9 @@ pub struct GameAssets {
 
     #[asset(path = "elementWood008.png")]
     pub roof: Handle<Image>,
+
+    #[asset(path = "background/colored_grass.png")]
+    pub background: Handle<Image>,
 }
 
 pub struct LoadingPlugin;
