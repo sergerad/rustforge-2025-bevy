@@ -1,7 +1,7 @@
 use avian2d::prelude::*;
 use bevy::prelude::*;
 
-use crate::{GameState, loading::GameAssets};
+use crate::{GameState, loading::GameAssets, piggies::PiggySpawn};
 
 pub fn plugin(app: &mut App) {
     app.add_systems(OnEnter(GameState::Playing), setup);
@@ -16,13 +16,6 @@ fn setup(mut commands: Commands, assets: Res<GameAssets>) {
         RigidBody::Static,
         Collider::rectangle(1800., 100.),
     ));
-
-    let piggies = vec![
-        // house 1
-        Vec2::new(50., -130.),
-        // house 2
-        Vec2::new(450., -130.),
-    ];
 
     let boxes = vec![
         // house 1
@@ -51,6 +44,13 @@ fn setup(mut commands: Commands, assets: Res<GameAssets>) {
         Vec2::new(500., 30.),
     ];
 
+    let piggies = vec![
+        // house 1
+        Vec2::new(50., -130.),
+        // house 2
+        Vec2::new(450., -130.),
+    ];
+
     for b in boxes {
         commands.spawn((
             Name::new("box"),
@@ -77,25 +77,5 @@ fn setup(mut commands: Commands, assets: Res<GameAssets>) {
         )],
     ));
 
-    for p in piggies {
-        commands
-            .spawn((
-                Name::new("piggy"),
-                StateScoped(GameState::Playing),
-                Transform::from_translation(Vec3::new(p.x, p.y, 0.)),
-                Sensor,
-                Collider::rectangle(30., 30.),
-                CollisionEventsEnabled,
-                children![(
-                    Transform::from_scale(Vec3::new(0.5, 0.5, 1.)),
-                    Sprite::from_image(assets.piggy.clone()),
-                )],
-            ))
-            .observe(on_piggy_collision);
-    }
-}
-
-fn on_piggy_collision(trigger: Trigger<OnCollisionStart>, mut commands: Commands) {
-    let target = trigger.target();
-    commands.entity(target).despawn();
+    commands.trigger(PiggySpawn(piggies));
 }

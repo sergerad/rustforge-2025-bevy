@@ -2,6 +2,8 @@ mod back_button;
 mod background;
 mod level;
 mod loading;
+mod piggies;
+mod piggies_ui;
 mod sling;
 mod splash_screen;
 
@@ -57,6 +59,8 @@ fn main() {
         sling::plugin,
         background::plugin,
         back_button::plugin,
+        piggies::plugin,
+        piggies_ui::plugin,
     ));
 
     app.add_plugins(PhysicsPlugins::default());
