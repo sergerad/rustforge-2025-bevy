@@ -35,5 +35,10 @@ impl Plugin for LoadingPlugin {
 
 fn on_enter(mut commands: Commands) {
     info!("loading");
-    commands.spawn((Camera2d, MainCamera, Msaa::Off));
+    commands.spawn((
+        Camera2d,
+        MainCamera,
+        Msaa::Off,
+        Transform::from_scale(Vec3::splat(1.2)),
+    ));
 }

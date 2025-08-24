@@ -36,7 +36,6 @@ fn setup(mut commands: Commands, assets: Res<GameAssets>) {
                             ..Default::default()
                         },
                         TextLayout::new_with_justify(JustifyText::Center).with_no_wrap(),
-                        TextColor::from(Color::BLACK)
                     ),
                     bevy(&assets),
                 ],
@@ -79,6 +78,5 @@ fn play_button() -> impl Bundle {
             ..Default::default()
         },
         TextLayout::new_with_justify(JustifyText::Center).with_no_wrap(),
-        TextColor::from(Color::BLACK),
     )
 }

@@ -5,5 +5,4 @@
 * multiple piggies
 * show piggy killed count
 * go back to menu when all piggies are killed
-* background image
 * bomb?
