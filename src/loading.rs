@@ -39,6 +39,6 @@ fn on_enter(mut commands: Commands) {
         Camera2d,
         MainCamera,
         Msaa::Off,
-        Transform::from_scale(Vec3::splat(1.2)),
+        Transform::from_scale(Vec3::splat(1.6)),
     ));
 }
