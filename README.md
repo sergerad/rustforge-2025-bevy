@@ -2,7 +2,6 @@
 
 ## TODO
 
-* back button
 * show piggy killed count
-* go back to menu when all piggies are killed
+* show win overlay when all piggies are killed (plus back button)
 * bomb?

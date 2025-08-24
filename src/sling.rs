@@ -30,6 +30,7 @@ pub fn plugin(app: &mut App) {
 fn setup(mut commands: Commands, sling: Res<Sling>, assets: Res<GameAssets>) {
     commands.spawn((
         Name::new("sling"),
+        StateScoped(GameState::Playing),
         Transform::from_translation(sling.pos.extend(0.)),
         LinearVelocity(sling.velocity),
         children![(
@@ -59,6 +60,7 @@ fn on_shoot(
 ) {
     commands.spawn((
         Name::new("bird"),
+        StateScoped(GameState::Playing),
         Transform::from_translation(sling.pos.extend(0.)),
         RigidBody::Dynamic,
         LinearVelocity(sling.velocity),

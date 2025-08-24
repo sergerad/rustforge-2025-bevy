@@ -11,6 +11,7 @@ fn setup(mut commands: Commands, assets: Res<GameAssets>) {
     // ground
     commands.spawn((
         Name::new("ground"),
+        StateScoped(GameState::Playing),
         Transform::from_translation(Vec3::new(0., -200., 0.)),
         RigidBody::Static,
         Collider::rectangle(1800., 100.),
@@ -53,6 +54,7 @@ fn setup(mut commands: Commands, assets: Res<GameAssets>) {
     for b in boxes {
         commands.spawn((
             Name::new("box"),
+            StateScoped(GameState::Playing),
             Transform::from_translation(Vec3::new(b.x, b.y, 0.)),
             RigidBody::Dynamic,
             Collider::rectangle(40., 40.),
@@ -65,6 +67,7 @@ fn setup(mut commands: Commands, assets: Res<GameAssets>) {
 
     commands.spawn((
         Name::new("roof"),
+        StateScoped(GameState::Playing),
         Transform::from_translation(Vec3::new(50., 50., 0.)),
         RigidBody::Dynamic,
         Collider::triangle(Vec2::new(-80., 0.), Vec2::new(0., 80.), Vec2::new(80., 0.)),
@@ -78,6 +81,7 @@ fn setup(mut commands: Commands, assets: Res<GameAssets>) {
         commands
             .spawn((
                 Name::new("piggy"),
+                StateScoped(GameState::Playing),
                 Transform::from_translation(Vec3::new(p.x, p.y, 0.)),
                 Sensor,
                 Collider::rectangle(30., 30.),

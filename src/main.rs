@@ -1,3 +1,4 @@
+mod back_button;
 mod background;
 mod level;
 mod loading;
@@ -55,6 +56,7 @@ fn main() {
         level::plugin,
         sling::plugin,
         background::plugin,
+        back_button::plugin,
     ));
 
     app.add_plugins(PhysicsPlugins::default());
