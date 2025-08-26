@@ -1,6 +1,9 @@
 # rustforgeconf 2025 gamedev workshop
 
+RustForge '25 GameDev workshop project.
 
+* run `cargo run` to start the game.
+* use `trunk serve` to test the web build.
 
 ## Further Reading
 
