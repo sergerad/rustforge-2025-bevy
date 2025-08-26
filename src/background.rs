@@ -1,3 +1,4 @@
+/// here we define a plugin that only loads a background image
 use bevy::prelude::*;
 
 use crate::{GameState, loading::GameAssets};

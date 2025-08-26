@@ -15,6 +15,11 @@ use crate::loading::LoadingPlugin;
 #[derive(Component)]
 pub struct MainCamera;
 
+/// These are the different Game State we support.
+/// States allow us to trigger life-cycle events when entering,
+/// leaving or Updating per frame in a certain state.
+/// Furthermore using `scoped_entities` we can spawn entites
+/// that get automatically cleaned up when a state is exited
 #[derive(States, Default, Clone, Eq, PartialEq, Debug, Hash)]
 #[states(scoped_entities)]
 enum GameState {
@@ -24,11 +29,15 @@ enum GameState {
     Playing,
 }
 
+/// The entry function of our game
 fn main() {
     let mut app = App::new();
+
+    // We setup the Bevy Default Plugins for the most part this is just chore
     app.add_plugins(
         DefaultPlugins
             .set(AssetPlugin {
+                // needed so the game works on the web
                 meta_check: bevy::asset::AssetMetaCheck::Never,
                 ..default()
             })
@@ -45,9 +54,16 @@ fn main() {
             }),
     );
 
+    // register physics plugins
+    app.add_plugins(PhysicsPlugins::default());
+    app.add_plugins(PhysicsDebugPlugin::default());
+
     app.init_state::<GameState>();
+
+    // we configure a custom non-real gravity for or physics to make it feel more gamy
     app.insert_resource(Gravity(Vec2::NEG_Y * 9.81 * 50.0));
 
+    // here we register all our custom plugins
     app.add_plugins((
         LoadingPlugin,
         splash_screen::plugin,
@@ -59,8 +75,6 @@ fn main() {
         piggies_ui::plugin,
     ));
 
-    app.add_plugins(PhysicsPlugins::default());
-    app.add_plugins(PhysicsDebugPlugin::default());
-
+    // this runs the game
     app.run();
 }

@@ -1,3 +1,4 @@
+/// This define the plugin handling the piggie behaviour: spawning, getting hit, despawning
 use avian2d::prelude::*;
 use bevy::prelude::*;
 

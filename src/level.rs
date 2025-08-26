@@ -1,3 +1,5 @@
+/// This plugin loads the level once entering `Playing`
+/// state from hardcoded elements.
 use avian2d::prelude::*;
 use bevy::prelude::*;
 

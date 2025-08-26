@@ -1,3 +1,6 @@
+/// This plugin defines the sling shot mechanic of the birds.
+/// The `Sling` resource holds the position and velocity of the sling.
+/// This way we can worry about seperating working on the trajectory visualizing and the sling shot input mechanics.
 use avian2d::prelude::*;
 use bevy::prelude::*;
 

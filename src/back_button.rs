@@ -1,3 +1,5 @@
+/// This simply adds a UI containing a back button
+/// in case the Player gets stuck and wants to abort the level
 use bevy::prelude::*;
 
 use crate::GameState;

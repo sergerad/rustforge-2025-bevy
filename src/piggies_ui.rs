@@ -1,3 +1,5 @@
+/// Here we only worry about the UI part that show the player
+/// how many piggies are still left to hit out of how many that were spawned
 use bevy::prelude::*;
 
 use crate::{GameState, piggies::PiggyResources};

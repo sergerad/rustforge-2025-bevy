@@ -1,3 +1,4 @@
+/// Here we handle the SplashScreen menu screen, its spawning and reacting on button events
 use bevy::{ecs::relationship::RelatedSpawnerCommands, prelude::*};
 
 use crate::{GameState, loading::GameAssets};

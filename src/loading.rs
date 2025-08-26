@@ -1,3 +1,7 @@
+/// Our LoadingPlugin uses `bevy_asset_loader` to preload all assets
+/// we are using in one go and not move on before they are done loading.
+/// This helps with the async nature of asset loading otherwise.
+/// Once all assets are loaded we move over to `GameState::SplashScreen`
 use bevy::prelude::*;
 use bevy_asset_loader::prelude::*;
 
@@ -24,7 +28,7 @@ pub struct GameAssets {
 pub struct LoadingPlugin;
 impl Plugin for LoadingPlugin {
     fn build(&self, app: &mut App) {
-        app.add_systems(OnEnter(GameState::Loading), on_enter)
+        app.add_systems(OnExit(GameState::Loading), on_exit)
             .add_loading_state(
                 LoadingState::new(GameState::Loading)
                     .continue_to_state(GameState::SplashScreen)
@@ -33,8 +37,8 @@ impl Plugin for LoadingPlugin {
     }
 }
 
-fn on_enter(mut commands: Commands) {
-    info!("loading");
+/// here we spawn our camera once
+fn on_exit(mut commands: Commands) {
     commands.spawn((
         Camera2d,
         MainCamera,
